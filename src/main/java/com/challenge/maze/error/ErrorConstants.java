@@ -10,5 +10,6 @@ public class ErrorConstants {
     public static final String EMPTY_FILE = "The file provided is empty!";
     public static final String DUPLICATE_STARTING_POINT = "Maze can't have two starting points!";
     public static final String DUPLICATE_END_POINT = "Duplicate end point";
+    public static final String NO_PATH_EXISTS = "No path exists! The maze can't be solved!";
 
 }

@@ -4,6 +4,7 @@ public class Maze {
 
     private Block[][] grid;
     private Block start;
+    private Block end;
     private Integer height;
     private Integer width;
 
@@ -46,6 +47,15 @@ public class Maze {
 
     public Maze setStart(Block start) {
         this.start = start;
+        return this;
+    }
+
+    public Block getEnd() {
+        return end;
+    }
+
+    public Maze setEnd(Block end) {
+        this.end = end;
         return this;
     }
 

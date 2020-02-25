@@ -19,14 +19,20 @@ public class PathFinder {
         Maze maze = null;
         try {
             //maze = mazeLoader.readFile(args[0]);
-            maze = mazeLoader.readFile("F:\\projects\\maze-challenge\\src\\test\\resources\\files\\MazeFile");
+            maze = mazeLoader.readFile("F:\\projects\\maze-challenge\\src\\test\\resources\\files\\remove-maze");
         } catch (MazeException e) {
             logger.error(e.getMessage());
             return;
         }
 
         PathService pathService = new PathService();
-        List<Block> path = pathService.findPath(maze);
+        List<Block> path = null;
+        try {
+            path = pathService.findPath(maze);
+        } catch (MazeException e) {
+            logger.error(e.getMessage());
+            return;
+        }
 
         logger.info("The path to exit the maze is:");
         for (Block block : path) {

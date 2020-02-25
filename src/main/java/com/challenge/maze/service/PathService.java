@@ -3,17 +3,21 @@ package com.challenge.maze.service;
 import com.challenge.maze.domain.Block;
 import com.challenge.maze.domain.Direction;
 import com.challenge.maze.domain.Maze;
+import com.challenge.maze.error.MazeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.challenge.maze.error.ErrorConstants.NO_PATH_EXISTS;
+
 public class PathService {
+
 
     private static Logger logger = LogManager.getLogger(PathService.class);
 
-    public List<Block> findPath(Maze maze) {
+    public List<Block> findPath(Maze maze) throws MazeException {
         LinkedList<Block> nextToVisit = new LinkedList<>();
         Block start = maze.getStart();
         nextToVisit.add(start);
@@ -38,7 +42,7 @@ public class PathService {
             nextToVisit.addAll(neighbours);
             current.setVisited(true);
         }
-        return Collections.emptyList();
+        throw new MazeException(NO_PATH_EXISTS);
     }
 
     /**
