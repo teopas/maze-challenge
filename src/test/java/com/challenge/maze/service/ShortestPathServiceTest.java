@@ -11,20 +11,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PathServiceTest {
+public class ShortestPathServiceTest {
 
     @Test
     void testSuccessFoundPath() throws MazeException {
-        PathService pathService = new PathService();
-        List<Block> path = pathService.findPath(createMaze("files/MazeFile"));
+        ShortestPathService shortestPathService = new ShortestPathService();
+        List<Block> path = shortestPathService.findPath(createMaze("files/MazeFile"));
         assertTrue(path.get((path.size() - 1)).getBlockType().equals(Block.BlockType.END));
         assertTrue(path.get(0).getBlockType().equals(Block.BlockType.START));
     }
 
     @Test
     void testWrongMaze() throws MazeException {
-        PathService pathService = new PathService();
-        MazeException mazeException = assertThrows(MazeException.class, () -> pathService.findPath(createMaze("files/wrong-maze")));
+        ShortestPathService shortestPathService = new ShortestPathService();
+        MazeException mazeException = assertThrows(MazeException.class, () -> shortestPathService.findPath(createMaze("files/wrong-maze")));
         assertTrue(mazeException.getMessage().contains(ErrorConstants.NO_PATH_EXISTS));
     }
 

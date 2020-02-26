@@ -4,6 +4,7 @@ import com.challenge.maze.domain.Block;
 import com.challenge.maze.domain.Direction;
 import com.challenge.maze.domain.Maze;
 import com.challenge.maze.error.MazeException;
+import com.challenge.maze.service.util.MazeUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,32 +13,28 @@ import java.util.stream.Collectors;
 
 import static com.challenge.maze.error.ErrorConstants.NO_PATH_EXISTS;
 
-public class PathService {
+public class ShortestPathService {
 
-
-    private static Logger logger = LogManager.getLogger(PathService.class);
+    private static Logger logger = LogManager.getLogger(ShortestPathService.class);
 
     public List<Block> findPath(Maze maze) throws MazeException {
+        logger.info("Start the shortest path calculations...");
         LinkedList<Block> nextToVisit = new LinkedList<>();
         Block start = maze.getStart();
         nextToVisit.add(start);
 
         while (!nextToVisit.isEmpty()) {
             Block current = nextToVisit.remove();
-
-            if (!maze.isValidLocation(current) || current.isVisited()) {
+            if (MazeUtil.isOutOfBounds(maze, current) || current.isVisited()) {
                 continue;
             }
-
             if (current.getBlockType().equals(Block.BlockType.WALL)) {
                 current.setVisited(true);
                 continue;
             }
-
             if (current.getBlockType().equals(Block.BlockType.END)) {
                 return backtrackPath(current);
             }
-            logger.info("Finding neighbours of {}", current.getBlockCoordinate().toString());
             List<Block> neighbours = findNeighbours(maze, current);
             nextToVisit.addAll(neighbours);
             current.setVisited(true);

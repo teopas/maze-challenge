@@ -11,11 +11,6 @@ public class Maze {
     public Maze() {
     }
 
-    public boolean isValidLocation(Block block) {
-        Coordinate coordinate = block.getBlockCoordinate();
-        return coordinate.getRow() >= 0 || coordinate.getColumn() >= 0
-                || coordinate.getRow() < width || coordinate.getColumn() < height;
-    }
 
     public Block moveTo(Block current, Direction direction) {
         if (current.getBlockCoordinate().getRow() == 0 && direction.equals(Direction.SOUTH)

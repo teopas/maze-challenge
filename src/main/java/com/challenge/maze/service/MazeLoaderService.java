@@ -56,7 +56,6 @@ public class MazeLoaderService {
         Block[][] mazeMatrix = new Block[fileLines.size()][lineSize];
         Maze maze = new Maze()
                 .setGrid(mazeMatrix);
-        boolean endBlockAlreadySet = false;
         for (int i = 0; i < fileLines.size(); i++) {
             char[] chars = fileLines.get(i).toCharArray();
             for (int j = 0; j < chars.length; j++) {
@@ -64,10 +63,7 @@ public class MazeLoaderService {
                 Block.BlockType blockType = mapType(character);
                 Block block = new Block(blockType, new Coordinate(i, j));
                 setStartingBlock(maze, blockType, block);
-                validateEndPoint(endBlockAlreadySet, blockType);
-                if (blockType.equals(Block.BlockType.END)) {
-                    endBlockAlreadySet = true;
-                }
+                setEndingBlock(maze, blockType, block);
                 mazeMatrix[i][j] = block;
             }
         }
@@ -93,6 +89,15 @@ public class MazeLoaderService {
                 throw new MazeException(DUPLICATE_STARTING_POINT);
             }
             maze.setStart(block);
+        }
+    }
+
+    private void setEndingBlock(Maze maze, Block.BlockType blockType, Block block) throws MazeException {
+        if (blockType.equals(Block.BlockType.END)) {
+            if (maze.getEnd() != null) {
+                throw new MazeException(DUPLICATE_END_POINT);
+            }
+            maze.setEnd(block);
         }
     }
 
