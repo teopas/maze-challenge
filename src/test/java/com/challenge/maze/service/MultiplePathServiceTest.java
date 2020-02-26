@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MultiplePathServiceTest {
 
     @Test
-    void findMultiple() throws MazeException {
+    public void findMultiple() throws MazeException {
         MultiplePathService multiplePathService = new MultiplePathService();
         Maze maze = createMaze("files/small-maze");
         List<List<Block>> paths = multiplePathService.findMultiplePaths(maze);
@@ -24,7 +24,7 @@ public class MultiplePathServiceTest {
     }
 
     @Test
-    void testWrongMaze() {
+    public void testWrongMaze() {
         MultiplePathService multiplePathService = new MultiplePathService();
         MazeException mazeException = assertThrows(MazeException.class, () -> multiplePathService.findMultiplePaths(createMaze("files/wrong-maze")));
         assertTrue(mazeException.getMessage().contains(ErrorConstants.NO_PATH_EXISTS));

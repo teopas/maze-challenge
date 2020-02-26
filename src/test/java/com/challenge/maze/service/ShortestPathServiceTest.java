@@ -8,21 +8,20 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ShortestPathServiceTest {
 
     @Test
-    void testSuccessFoundPath() throws MazeException {
+    public void testSuccessFoundPath() throws MazeException {
         ShortestPathService shortestPathService = new ShortestPathService();
         List<Block> path = shortestPathService.findPath(createMaze("files/MazeFile"));
-        assertTrue(path.get((path.size() - 1)).getBlockType().equals(Block.BlockType.END));
-        assertTrue(path.get(0).getBlockType().equals(Block.BlockType.START));
+        assertEquals(path.get((path.size() - 1)).getBlockType(), Block.BlockType.END);
+        assertEquals(path.get(0).getBlockType(), Block.BlockType.START);
     }
 
     @Test
-    void testWrongMaze() {
+    public void testWrongMaze() {
         ShortestPathService shortestPathService = new ShortestPathService();
         MazeException mazeException = assertThrows(MazeException.class, () -> shortestPathService.findPath(createMaze("files/wrong-maze")));
         assertTrue(mazeException.getMessage().contains(ErrorConstants.NO_PATH_EXISTS));
