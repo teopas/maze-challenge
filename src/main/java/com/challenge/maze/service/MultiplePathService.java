@@ -18,6 +18,9 @@ public class MultiplePathService {
 
     private static Logger logger = LogManager.getLogger(MultiplePathService.class);
 
+    /**
+     * Method to evaluate multiple paths using depth search with recursion
+     */
     public List<List<Block>> findMultiplePaths(Maze maze) throws MazeException {
         logger.info("Start the multiple path calculations...");
         List<List<Block>> paths = findPaths(maze, maze.getStart(), maze.getEnd());

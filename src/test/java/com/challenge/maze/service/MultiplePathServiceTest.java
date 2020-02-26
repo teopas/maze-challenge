@@ -2,10 +2,13 @@ package com.challenge.maze.service;
 
 import com.challenge.maze.domain.Block;
 import com.challenge.maze.domain.Maze;
+import com.challenge.maze.error.ErrorConstants;
 import com.challenge.maze.error.MazeException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MultiplePathServiceTest {
 
@@ -15,11 +18,16 @@ public class MultiplePathServiceTest {
         Maze maze = createMaze("files/small-maze");
         List<List<Block>> paths = multiplePathService.findMultiplePaths(maze);
         for (List<Block> path : paths) {
-            for (Block block : path) {
-                System.out.print(block.getBlockCoordinate().toString());
-            }
-            System.out.println();
+            assertEquals(path.get((path.size() - 1)).getBlockType(), Block.BlockType.END);
+            assertEquals(path.get(0).getBlockType(), Block.BlockType.START);
         }
+    }
+
+    @Test
+    void testWrongMaze() {
+        MultiplePathService multiplePathService = new MultiplePathService();
+        MazeException mazeException = assertThrows(MazeException.class, () -> multiplePathService.findMultiplePaths(createMaze("files/wrong-maze")));
+        assertTrue(mazeException.getMessage().contains(ErrorConstants.NO_PATH_EXISTS));
     }
 
     private String resolvePath(String filename) {

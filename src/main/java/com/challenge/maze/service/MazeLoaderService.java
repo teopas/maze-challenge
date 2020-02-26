@@ -67,6 +67,9 @@ public class MazeLoaderService {
                 mazeMatrix[i][j] = block;
             }
         }
+        if (maze.getEnd() == null || maze.getStart() == null) {
+            throw new MazeException(MISING_POINT);
+        }
         maze.setWidth(lineSize)
                 .setHeight(fileLines.size());
         return maze;

@@ -11,5 +11,6 @@ public class ErrorConstants {
     public static final String DUPLICATE_STARTING_POINT = "Maze can't have two starting points!";
     public static final String DUPLICATE_END_POINT = "Duplicate end point";
     public static final String NO_PATH_EXISTS = "No path exists! The maze can't be solved!";
+    public static final String MISING_POINT = "At least one start and end point should be provided!";
 
 }

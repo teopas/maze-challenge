@@ -47,6 +47,13 @@ public class MazeLoaderServiceTest {
         assertTrue(mazeException.getMessage().contains(ErrorConstants.DUPLICATE_END_POINT));
     }
 
+    @Test
+    public void testNoStartPoint() {
+        String filePath = resolvePath("files/maze-file-no-start-point");
+        MazeException mazeException = assertThrows(MazeException.class, () -> new MazeLoaderService().readFile(filePath));
+        assertTrue(mazeException.getMessage().contains(ErrorConstants.MISING_POINT));
+    }
+
     private String resolvePath(String filename) {
         return getClass().getClassLoader().getResource(filename).getPath();
     }

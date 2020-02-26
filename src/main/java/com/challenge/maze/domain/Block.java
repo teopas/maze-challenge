@@ -67,4 +67,9 @@ public class Block {
     public int hashCode() {
         return Objects.hash(blockCoordinate);
     }
+
+    @Override
+    public String toString() {
+        return blockCoordinate.toString();
+    }
 }

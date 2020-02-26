@@ -24,6 +24,8 @@ public class PathFinder {
         String method = args[0];
         if (validateArgs(filePath, method)) {
             logger.info("Wrong program arguments.");
+            logger.info("The first argument should be a solve method: Shortest or Multiple.");
+            logger.info("The second argument should be the absolute file path.");
             return;
         }
         Maze maze = null;
@@ -44,22 +46,13 @@ public class PathFinder {
 
         List<List<Block>> paths = multiplePathService.findMultiplePaths(maze);
         logger.info("The paths to exit the maze are:");
-        for (List<Block> path : paths) {
-            for (Block block : path) {
-                System.out.print(block.getBlockCoordinate().toString());
-            }
-            System.out.println();
-        }
+        paths.forEach(path -> logger.info(path));
     }
 
     private static void callShortestPathService(Maze maze) throws MazeException {
         ShortestPathService shortestPathService = new ShortestPathService();
-        List<Block> path = null;
-        path = shortestPathService.findPath(maze);
-        logger.info("The path to exit the maze is:");
-        for (Block block : path) {
-            System.out.print(block.getBlockCoordinate().toString());
-        }
+        List<Block> path = shortestPathService.findPath(maze);
+        logger.info("The path to exit the maze is: {} ", path);
     }
 
     private static boolean validateArgs(String filePath, String method) {

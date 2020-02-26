@@ -22,7 +22,7 @@ public class ShortestPathServiceTest {
     }
 
     @Test
-    void testWrongMaze() throws MazeException {
+    void testWrongMaze() {
         ShortestPathService shortestPathService = new ShortestPathService();
         MazeException mazeException = assertThrows(MazeException.class, () -> shortestPathService.findPath(createMaze("files/wrong-maze")));
         assertTrue(mazeException.getMessage().contains(ErrorConstants.NO_PATH_EXISTS));

@@ -17,6 +17,9 @@ public class ShortestPathService {
 
     private static Logger logger = LogManager.getLogger(ShortestPathService.class);
 
+    /**
+     * Method to evaluate the shortest path with the use of breath first search algorithm
+     */
     public List<Block> findPath(Maze maze) throws MazeException {
         logger.info("Start the shortest path calculations...");
         LinkedList<Block> nextToVisit = new LinkedList<>();
